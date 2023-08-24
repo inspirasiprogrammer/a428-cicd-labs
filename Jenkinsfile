@@ -19,10 +19,11 @@ pipeline {
                 sh './jenkins/scripts/test.sh' 
             }
         }
-        stage('Deliver') {
+        stage('Deploy') {
             steps {
                 sh './jenkins/scripts/deliver.sh'
-                input message: 'Finished using the website? (Click "Proceed" to continue)'
+                // User bisa melakukan test App's selama se-menit
+                sh 'sleep 1m'
                 sh './jenkins/scripts/kill.sh'
             }
         }
