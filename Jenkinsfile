@@ -24,6 +24,13 @@ pipeline {
                 input message: 'Lanjutkan ke tahap Deploy? (Press "Proceed" to continue)'
             }
         }
-        
+        stage('Deploy') {
+            steps {
+                sh './jenkins/scripts/deliver.sh'
+                input message: 'Finished using the website? (Click "Proceed" to continue)'
+                sleep time: 1, unit: 'MINUTES'
+                sh './jenkins/scripts/kill.sh'
+            }
+        }
     }
 }
